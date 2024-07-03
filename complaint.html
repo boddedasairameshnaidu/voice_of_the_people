@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Complaint Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        input[type="file"] {
+            display: inline-block;
+        }
+
+        .file-input-label {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .file-input-label:hover {
+            background-color: #45a049;
+        }
+        @media screen and (max-width: 600px) {
+            form {
+                max-width: 90%;
+            }
+
+            input[type="submit"] {
+                font-size: 14px;
+            }
+
+            .file-input-label {
+                font-size: 14px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Complaint Form</h1>
+    <form id="complaintForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="">Select a category</option>
+            <option value="Infrastructure">Infrastructure</option>
+            <option value="Public Safety">Public Safety</option>
+            <option value="Environment">Environment</option>
+            <!-- Add more categories as needed -->
+        </select><br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" required></textarea><br>
+
+        <label for="complaintDocument">Complaint Document:</label>
+        <input type="file" id="complaintDocument" name="complaintDocument"><br>
+        <br>
+        <br>
+        <input type="submit" value="Submit Complaint">
+    </form>
+
+    <script>
+        document.getElementById("complaintForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const category = document.getElementById("category").value;
+            const location = document.getElementById("location").value;
+            const description = document.getElementById("description").value;
+            const complaintDocument = document.getElementById("complaintDocument").files[0];
+
+            // Here, you can perform any additional validation or processing of the form data
+            // For simplicity, we'll just display the form values as an alert
+            const complaintData = {
+                name: name,
+                email: email,
+                phone: phone,
+                category: category,
+                location: location,
+                description: description,
+                complaintDocument: complaintDocument ? complaintDocument.name : "No file uploaded"
+            };
+
+            // Display the complaint data
+            alert("Complaint submitted:\n\n" + JSON.stringify(complaintData, null, 2));
+            window.location.href = "index.html";
+
+
+            // You can now send the complaint data to a server using AJAX or any other method to handle submissions.
+        });
+    </script>
+</body>
+</html>
